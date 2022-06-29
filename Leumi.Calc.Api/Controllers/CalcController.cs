@@ -14,7 +14,7 @@ namespace Leumi.Calc.Api.Controllers
     /// 
     /// </summary>
     [ApiController]
-    //[Authorize(Roles = "Mathman")]
+    [Authorize]
     public class CalcController: ControllerBase
     {
         private readonly ICalculatorService calculatorService;

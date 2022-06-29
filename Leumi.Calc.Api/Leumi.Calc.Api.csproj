@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\CalcController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="11.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.6" />
@@ -29,6 +33,10 @@
     <ProjectReference Include="..\Leumi.Calc.Application.Services\Leumi.Calc.Application.Services.csproj" />
     <ProjectReference Include="..\Leumi.Calc.Database\Leumi.Calc.Database.csproj" />
     <ProjectReference Include="..\Leumi.Calc.Domain.Core\Leumi.Calc.Domain.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="NewFolder\" />
   </ItemGroup>
 
 </Project>

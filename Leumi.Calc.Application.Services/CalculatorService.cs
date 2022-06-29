@@ -2,76 +2,64 @@
 using Leumi.Calc.Application.Services.Dtos;
 using Leumi.Calc.Domain.Core.Models;
 using Leumi.Calc.Domain.Core.Repositories;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 
 namespace Leumi.Calc.Application.Services
 {
     public class CalculatorService : ICalculatorService
     {
-        private readonly ICalcValuesRepository repository;
-        private readonly IMapper mapper;
-        public CalculatorService(ICalcValuesRepository calcValuesRepository, IMapper mapper)
+        private readonly IMemoryRepository repository;
+        private readonly ILogger log;
+        private readonly IHttpContextAccessor httpContext;
+        public CalculatorService(IMemoryRepository memoryRepository, ILogger<CalculatorService> logger, IHttpContextAccessor httpContext )
         {
-            this.repository = calcValuesRepository;
-            this.mapper = mapper;
+            this.repository = memoryRepository;
+            this.log = logger;
+            this.httpContext = httpContext;
         }
 
-        public double ExecuteCalculation(Guid calcValuesId, CalcOperationEnum calcOperation)
+        public double Sum(CalcValues values)
         {
-            var values = repository.GetCalcValues(calcValuesId);
-            double result = 0;
-            switch (calcOperation)
-            {
-                case CalcOperationEnum.sum:
-                    result = values.ValueA + values.ValueB;
-                    break;
-                case CalcOperationEnum.substract:
-                    result = values.ValueA - values.ValueB;
-                    break;
-                case CalcOperationEnum.mutiply:
-                    result = values.ValueA * values.ValueB;
-                    break;
-                case CalcOperationEnum.divide:
-                    if (values.ValueB == 0)
-                        throw new DivideByZeroException();
-                    result = values.ValueA / values.ValueB;
-                    break;
-
-            }
-            return result;
+            LogClaims();
+            return values.ValueA + values.ValueB;
         }
 
-        public Guid InsertCalcValues(CalcValues values)
+        public double Substract(CalcValues values)
         {
-
-            return repository.AddCalcValues(mapper.Map<CalcValuesModel>(values));
+            return values.ValueA * values.ValueB;
         }
 
-        public void Update(CalcValues values)
+        public double Divide(CalcValues values)
         {
 
-            repository.UpdateCalcValues(mapper.Map<CalcValuesModel>(values));
-        }
-        public void Update(CalcValuesPath updatePart)
-        {
-            var entity = repository.GetCalcValues(updatePart.ValuesId);
-
-            switch (updatePart.PropertyName)
-            {
-                case CalcValuesPath.PropertyNameEnum.ValueAEnum:
-                    entity.ValueA = updatePart.Value;
-                    break;
-                case CalcValuesPath.PropertyNameEnum.ValueBEnum:
-                    entity.ValueB = updatePart.Value;
-                    break;               
-
-            }
-
-            repository.UpdateCalcValues(entity);
+            return values.ValueA / values.ValueB;
         }
 
-        public void DeleteCalcValue(Guid id)
+        public double Multiply(CalcValues values)
         {
-            repository.DeleteCalcValue(id);
+            return values.ValueA * values.ValueB;
+        }
+
+        public void AddMemoryValue(double value)
+        {
+            repository.AddMemoryValue(value);
+        }
+
+        public double GetMemoryValue()
+        {
+           return repository.GetMemoryValue();
+        }
+
+        public void DeleteMemoryValue()
+        {
+            repository.DeleteMemoryValue();
+        }
+
+
+        private void LogClaims()
+        {
+            log.LogInformation(string.Join(',', httpContext.HttpContext.User.Claims));
         }
 
     }

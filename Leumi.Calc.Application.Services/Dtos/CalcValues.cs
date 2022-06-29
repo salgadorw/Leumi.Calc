@@ -27,20 +27,12 @@ namespace Leumi.Calc.Application.Services.Dtos
     public partial class CalcValues : IEquatable<CalcValues>
     { 
         /// <summary>
-        /// Gets or Sets ValuesId
-        /// </summary>
-        [Required]
-
-        [DataMember(Name="valuesId")]
-        public Guid? ValuesId { get; set; }
-
-        /// <summary>
         /// Gets or Sets ValueA
         /// </summary>
         [Required]
 
         [DataMember(Name="valueA")]
-        public double? ValueA { get; set; }
+        public double ValueA { get; set; }
 
         /// <summary>
         /// Gets or Sets ValueB
@@ -48,7 +40,7 @@ namespace Leumi.Calc.Application.Services.Dtos
         [Required]
 
         [DataMember(Name="valueB")]
-        public double? ValueB { get; set; }
+        public double ValueB { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -58,7 +50,7 @@ namespace Leumi.Calc.Application.Services.Dtos
         {
             var sb = new StringBuilder();
             sb.Append("class CalcValues {\n");
-            sb.Append("  ValuesId: ").Append(ValuesId).Append("\n");
+           
             sb.Append("  ValueA: ").Append(ValueA).Append("\n");
             sb.Append("  ValueB: ").Append(ValueB).Append("\n");
             sb.Append("}\n");
@@ -97,11 +89,7 @@ namespace Leumi.Calc.Application.Services.Dtos
             if (ReferenceEquals(this, other)) return true;
 
             return 
-                (
-                    ValuesId == other.ValuesId ||
-                    ValuesId != null &&
-                    ValuesId.Equals(other.ValuesId)
-                ) && 
+                
                 (
                     ValueA == other.ValueA ||
                     ValueA != null &&
@@ -124,8 +112,7 @@ namespace Leumi.Calc.Application.Services.Dtos
             {
                 var hashCode = 41;
                 // Suitable nullity checks etc, of course :)
-                    if (ValuesId != null)
-                    hashCode = hashCode * 59 + ValuesId.GetHashCode();
+                    
                     if (ValueA != null)
                     hashCode = hashCode * 59 + ValueA.GetHashCode();
                     if (ValueB != null)

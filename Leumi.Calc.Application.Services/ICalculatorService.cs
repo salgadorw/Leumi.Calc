@@ -1,14 +1,15 @@
-﻿
-using Leumi.Calc.Application.Services.Dtos;
+﻿using Leumi.Calc.Application.Services.Dtos;
 
 namespace Leumi.Calc.Application.Services
 {
     public interface ICalculatorService
     {
-        void DeleteCalcValue(Guid id);
-        double ExecuteCalculation(Guid calcValuesId, CalcOperationEnum calcOperation);
-        Guid InsertCalcValues(CalcValues values);
-        void Update(CalcValues values);
-        void Update(CalcValuesPath updatePart);
+        void AddMemoryValue(double value);
+        void DeleteMemoryValue();
+        double Divide(CalcValues values);
+        double GetMemoryValue();
+        double Multiply(CalcValues values);
+        double Substract(CalcValues values);
+        double Sum(CalcValues values);
     }
 }

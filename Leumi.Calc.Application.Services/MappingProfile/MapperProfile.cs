@@ -13,7 +13,7 @@ namespace Leumi.Calc.Application.Services.MappingProfile
     {
         public MapperProfile()
         {
-            CreateMap<CalcValues, CalcValuesModel>().ReverseMap();
+            //CreateMap<double, MemoryModel>().ReverseMap();
         }
     }
 }

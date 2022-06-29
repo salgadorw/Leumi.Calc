@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Leumi.Calc.Database
 {
-    public class DbContextCalc: DbContext
+    public class DbContextCalcMemory: DbContext
     {
-        public DbContextCalc(DbContextOptions<DbContextCalc> dbContextOptions) : base(dbContextOptions)
+        public DbContextCalcMemory(DbContextOptions<DbContextCalcMemory> dbContextOptions) : base(dbContextOptions)
         { }
-        public DbSet<CalcValuesModel> CalcValues { get; set; }
+        public DbSet<MemoryModel> Memory { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
     => options.UseQueryTrackingBehavior( QueryTrackingBehavior.TrackAll);

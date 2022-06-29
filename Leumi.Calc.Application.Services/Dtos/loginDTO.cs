@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace Leumi.Calc.Application.Services.Dtos
 {
-    
-    public enum CalcOperationEnum
+    public class LoginDTO
     {
-        sum,
-        substract,
-        mutiply,
-        divide
+        public string UserName { get; set; }
+        public string Password { get; set; }
     }
 }
